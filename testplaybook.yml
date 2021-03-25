@@ -1,0 +1,24 @@
+---
+ - hosts: localhost
+   gather_facts: false
+   ignore_errors: true
+   tasks:
+   - shell: "{{ item }}"
+     loop:
+          - docker container rm -f `docker ps -a -q` 2&> /dev/null
+          - docker rmi -f `docker images -a -q`2&> /dev/null
+          - docker build -t silicons/test:test1 .
+          - docker push silicons/test:test1
+
+
+
+ - hosts: docker
+   gather_facts: false
+   tasks:
+   - shell: "{{ item }}"
+     loop:
+          - docker container rm -f `docker ps -a -q` 2&> /dev/null
+          - docker rmi -f `docker images -a -q`2&> /dev/null
+          - docker pull silicons/test:test1
+          - docker container run -p 80:80 -d silicons/test:test1
+

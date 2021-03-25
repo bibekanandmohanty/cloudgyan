@@ -1,10 +1,10 @@
 FROM centos:latest
 RUN yum install -y httpd \
+wget \
 zip \
 unzip
-ADD https://www.free-css.com/free-css-templates/page265/woodo /var/www/html
+RUN wget https://freewebsitetemplates.com/website/jamesconsulting/ -O /var/www/html/index.html
 WORKDIR /var/www/html
 CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
 EXPOSE 80
-
 
