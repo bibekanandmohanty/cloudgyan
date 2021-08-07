@@ -1,0 +1,20 @@
+kubectl run web-server --image=nginx --port 80
+kubectl get pods -o wide
+kubectl expose deployment web-server --type NodePort
+kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl delete pod web-server
+kubectl delete pod --all
+kubectl apply -f web-server.yml
+kubectl delete -f web-server.yml
+kubectl exec -it web-server /bin/bash ####for pod having single container
+kubectl exec -it web-server -c <container_name> /bin/bash ####for pod having multiple containers
+kubectl run -it dev-server --image=ubuntu:14.04
+kubectl apply -f rc.yml
+kubectl get pod,rc --show-labels
+kubectl delete -f rc .yml
+kubectl label pod christ run-
+kubectl label pod web team=dev
+kubectl delete rc --cascade =false <rc_name> ##### delete only rc and not pods
+
+
+
