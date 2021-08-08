@@ -15,6 +15,13 @@ kubectl delete -f rc .yml
 kubectl label pod christ run-
 kubectl label pod web team=dev
 kubectl delete rc --cascade =false <rc_name> ##### delete only rc and not pods
+kubectl rollout history deployment <deployment_name>
+kubectl apply -f deployment.yml --record=true
+kubectl set image deployment nginx-deployment nginx=nginx:1.16.1 --record=true
+kubectl rollout history deployment <deployment_name> --revision=2 ## to see the changes that happened in rev2
+kubectl rollout undo deployment <deployment_name> --to-revision=4 ## to go back to revision4
+kubectl rollout pause deployment <deployment_name>
+
 
 
 
